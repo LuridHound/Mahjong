@@ -1,11 +1,14 @@
 #include <SFML/Graphics.hpp>
+#include "source/BackgroundManager/BackgroundManager.h"
+
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    const char* title = "Mahjong";
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), title);
 
+    BackgroundManager backgroundManager;
+    backgroundManager.changeBackground();
     while (window.isOpen())
     {
         sf::Event event;
@@ -16,7 +19,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        backgroundManager.draw(&window);
         window.display();
     }
 
