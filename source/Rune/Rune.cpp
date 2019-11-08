@@ -2,7 +2,7 @@
 
 
 int Rune::offsetX, Rune::offsetY;
-
+int Rune::textureSizeX, Rune::textureSizeY;
 
 //
 //
@@ -11,26 +11,9 @@ ID(ID)
 {
     texture.loadFromFile("resources/Textures/Runes/0.png");
     sprite.setTexture(texture);
-}
 
-
-//
-//
-void Rune::highlight()
-{
-    sprite.setColor(sf::Color(255, 255, 255, 215));
-
-    return;
-}
-
-
-//
-//
-void Rune::unhighlight()
-{
-    sprite.setColor(sf::Color(255, 255, 255, 255));
-
-    return;
+    textureSizeX = texture.getSize().x;
+    textureSizeY = texture.getSize().y;
 }
 
 
@@ -69,10 +52,29 @@ void Rune::draw(sf::RenderWindow* window)
 
 //
 //
-void Rune::setPosition(int x, int y, int z)
+void Rune::setPosition(const int X, const int Y, const int Z)
 {
-    sprite.setPosition(texture.getSize().x * (x / 2) + (texture.getSize().x / 2) * (x % 2) + z * offsetX,
-                       texture.getSize().y * (y / 2) + (texture.getSize().y / 2) * (y % 2) - z * offsetY);
+    sprite.setPosition(textureSizeX * (X / 2) + (textureSizeX / 2) * (X % 2) + Z * offsetX,
+                       textureSizeY * (Y / 2) + (textureSizeY / 2) * (Y % 2) - Z * offsetY);
+
+    return;
+}
+
+
+//  Return the ID of the rune.
+//  Each rune must have unique ID.
+[[nodiscard]]
+int Rune::getID() const
+{
+    return ID;
+}
+
+
+//
+//
+void Rune::highlight()
+{
+    sprite.setColor(sf::Color(255, 255, 255, 215));
 
     return;
 }
@@ -80,8 +82,9 @@ void Rune::setPosition(int x, int y, int z)
 
 //
 //
-[[nodiscard]]
-int Rune::getID() const
+void Rune::unhighlight()
 {
-    return ID;
+    sprite.setColor(sf::Color(255, 255, 255, 255));
+
+    return;
 }

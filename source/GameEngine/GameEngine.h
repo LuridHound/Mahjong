@@ -3,8 +3,8 @@
 
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../BackgroundManager/BackgroundManager.h"
 
+#include "../BackgroundManager/BackgroundManager.h"
 #include "../Geometry/Geometry.h"
 
 
@@ -13,7 +13,9 @@
 class GameEngine final
 {
     public :
+
         GameEngine();
+
         void run();
 
     private :

@@ -14,9 +14,10 @@
 class Rune final
 {
     public :
+
         Rune(const int ID);
 
-        void setPosition(int x, int y, int z);
+        void setPosition(const int x, const int y, const int z);
 
         [[nodiscard]]
         size_t getType() const;
@@ -30,11 +31,18 @@ class Rune final
 
         void highlight();
         void unhighlight();
+
     private :
-        constexpr static int FACTOR = 10;
-        const int ID;
+
         static int offsetX, offsetY;
+        static int textureSizeX, textureSizeY;
+
+        constexpr static int FACTOR = 10;
+
+        const int ID;
+
         size_t type;
+
         sf::Texture texture;
         sf::Sprite sprite;
 };

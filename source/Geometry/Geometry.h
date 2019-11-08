@@ -10,54 +10,53 @@
 //
 class Geometry final
 {
-public :
-    void draw(sf::RenderWindow* window);
+    public :
 
-    void deleteRunes(Rune* first, Rune* second);
+        void draw(sf::RenderWindow* window);
 
-    [[nodiscard]]
-    bool isFree(int x, int y, int z);
+        void deleteRunes(Rune* first, Rune* second);
 
-    [[nodiscard]]
-    bool isFree(const int id_first, const int id_second);
+        [[nodiscard]]
+        bool isFree(int x, int y, int z);
 
-    void fillRectangle(int x, int y, int z);
 
-    [[nodiscard]]
-    bool isFree(Rune* rune);
+        [[nodiscard]]
+        bool isFree(Rune* rune);
 
-    [[nodiscard]]
-    Rune* getRune(int x, int y);
+        [[nodiscard]]
+        Rune* getRune(int x, int y);
 
-    void loadLevel();
+        void loadLevel(const int LEVEL);
 
-    void clearCell(int x, int y, int z);
+        [[nodiscard]]
+        bool isEmpty() const;
 
-    [[nodiscard]]
-    bool isEmpty() const;
+    private :
 
-    void generateRunes();
-private :
+        void clearCell(int x, int y, int z);
+
+        void fillRectangle(int x, int y, int z);
+        void generateRunes();
+
     struct Position
-            {
-            public :
-                int x, y, z;
-            };
-    std::vector<Position> positions;
-    int id = 0;
-    //beware
-    struct Tile
-            {
-                int x = - 1, y = -1;
-                bool info = false;
-                int id = -1;
-            };
-    constexpr static size_t MAX_WIDTH = 70u,
-            MAX_HEIGHT = 24u,
-            MAX_DEPTH = 7u;
-    constexpr static int RUNES_COUNT = 36;
-    Tile field[MAX_WIDTH][MAX_HEIGHT][MAX_DEPTH]={};
-    std::vector<Rune*> runes;
+                {
+                    int x, y, z;
+                };
+        std::vector<Position> positions;
+        int id = 0;
+        //beware
+        struct Tile
+                {
+                    int x = - 1, y = -1;
+                    bool info = false;
+                    int id = -1;
+                };
+        constexpr static size_t MAX_WIDTH = 70u,
+                MAX_HEIGHT = 24u,
+                MAX_DEPTH = 7u;
+        constexpr static int RUNES_COUNT = 36;
+        Tile field[MAX_WIDTH][MAX_HEIGHT][MAX_DEPTH]={};
+        std::vector<Rune*> runes;
 };
 
 

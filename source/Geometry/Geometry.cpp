@@ -74,16 +74,6 @@ void Geometry::fillRectangle(int x, int y, int z)
 //
 //
 [[nodiscard]]
-bool Geometry::isFree(const int id_first, const int id_second)
-{
-    (*std::find_if(runes.begin(), runes.end(), [&](Rune* rune){ if(rune->getID() == id_first) return true;}))->x;
-    return true;
-}
-
-
-//
-//
-[[nodiscard]]
 bool isFree(Rune* rune)
 {
 
@@ -181,9 +171,9 @@ void Geometry::generateRunes()
 
 //
 //
-void Geometry::loadLevel()
+void Geometry::loadLevel(const int LEVEL)
 {
-    std::fstream file("resources/Levels/3.txt");
+    std::fstream file("resources/Levels/" + std::to_string(LEVEL) + ".txt");
     for ( int y = 0; y < MAX_HEIGHT; ++y )
         for ( int x = 0; x < MAX_WIDTH; ++x )
         {

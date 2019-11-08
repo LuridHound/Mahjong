@@ -22,17 +22,18 @@ bool isOneType(Rune* first, Rune* second)
 //
 void GameEngine::run()
 {
-
-
     Rune* first = nullptr, *second = nullptr;
-    while(window->isOpen())
+    while ( window->isOpen() )
     {
         sf::Event event;
-        while (window->pollEvent(event))
+        while ( window->pollEvent(event) )
         {
-            if (event.type == sf::Event::Closed)
+            if ( event.type == sf::Event::Closed )
+            {
                 window->close();
-            if(event.type == sf::Event::MouseButtonPressed)
+            }
+
+            if ( event.type == sf::Event::MouseButtonPressed )
             {
                 //  press button and get the Rune and highlight it
                 //  if pressed second time on the same rune - unhighlight it
@@ -42,7 +43,7 @@ void GameEngine::run()
                 int x = sf::Mouse::getPosition().x;
                 int y = sf::Mouse::getPosition().y;
 
-                if(first == nullptr)
+                if ( first == nullptr )
                 {
                     first = geometry.getRune(x, y);
                     if ( first != nullptr )
@@ -54,7 +55,7 @@ void GameEngine::run()
                 else
                 {
                     second = geometry.getRune(x, y);
-                    if ( second == nullptr)
+                    if ( second == nullptr )
                     {
                         break;
                     }
@@ -72,9 +73,6 @@ void GameEngine::run()
                     first->unhighlight();
                     second->unhighlight();
 
-                    std::cout << "COMPARE";
-                    std::cout << first->getType() << ' ' << second->getType() << '\n';
-
                     if ( first->getType() == second->getType() )
                     geometry.deleteRunes(first, second);
                     first = nullptr;
@@ -90,6 +88,8 @@ void GameEngine::run()
 
         window->display();
     }
+
+    return;
 }
 
 
