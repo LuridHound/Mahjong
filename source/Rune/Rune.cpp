@@ -3,14 +3,45 @@
 
 //
 //
-Rune::Rune(int id):
-id(id)
+Rune::Rune(const int ID):
+ID(ID)
 {
-    type = rand() % 33;
-    texture.loadFromFile("resources/Textures/Runes/" + std::to_string(type) + ".png");
+    texture.loadFromFile("resources/Textures/Runes/0.png");
     sprite.setTexture(texture);
-    offset_x = texture.getSize().x / 12;
-    offset_y = texture.getSize().y / 12;
+}
+
+
+//
+//
+void Rune::highlight()
+{
+    sprite.setColor(sf::Color(255, 255, 255, 215));
+
+    return;
+}
+
+
+//
+//
+void Rune::unhighlight()
+{
+    sprite.setColor(sf::Color(255, 255, 255, 255));
+
+    return;
+}
+
+
+//
+//
+void Rune::setRuneType(const int TYPE)
+{
+    type = TYPE;
+    texture.loadFromFile("resources/Textures/Runes/" + std::to_string(TYPE) + ".png");
+
+    offsetX = texture.getSize().x / FACTOR;
+    offsetY = texture.getSize().y / FACTOR;
+
+    return;
 }
 
 
@@ -37,8 +68,8 @@ void Rune::draw(sf::RenderWindow* window)
 //
 void Rune::setPosition(int x, int y, int z)
 {
-    sprite.setPosition(texture.getSize().x * (x / 2) + (texture.getSize().x / 2) * (x % 2) + z * offset_x,
-                       texture.getSize().y * (y / 2) + (texture.getSize().y / 2) * (y % 2) - z * offset_y);
+    sprite.setPosition(texture.getSize().x * (x / 2) + (texture.getSize().x / 2) * (x % 2) + z * offsetX,
+                       texture.getSize().y * (y / 2) + (texture.getSize().y / 2) * (y % 2) - z * offsetY);
 
     return;
 }
@@ -49,5 +80,5 @@ void Rune::setPosition(int x, int y, int z)
 [[nodiscard]]
 int Rune::getID() const
 {
-    return id;
+    return ID;
 }

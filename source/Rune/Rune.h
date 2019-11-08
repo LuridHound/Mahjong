@@ -14,7 +14,7 @@
 class Rune final
 {
     public :
-        Rune(int id);
+        Rune(const int ID);
 
         void setPosition(int x, int y, int z);
 
@@ -24,11 +24,16 @@ class Rune final
         [[nodiscard]]
         int getID() const;
 
+        void setRuneType(const int TYPE);
         void draw(sf::RenderWindow* window);
         int x, y, z;    // get rid
+
+        void highlight();
+        void unhighlight();
     private :
-        int id;
-        int offset_x, offset_y;
+        constexpr static int FACTOR = 12;
+        const int ID;
+        int offsetX, offsetY;
         size_t type;
         sf::Texture texture;
         sf::Sprite sprite;
