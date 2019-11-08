@@ -1,6 +1,9 @@
 #include "Rune.h"
 
 
+int Rune::offsetX, Rune::offsetY;
+
+
 //
 //
 Rune::Rune(const int ID):

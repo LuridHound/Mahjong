@@ -31,9 +31,9 @@ class Rune final
         void highlight();
         void unhighlight();
     private :
-        constexpr static int FACTOR = 12;
+        constexpr static int FACTOR = 10;
         const int ID;
-        int offsetX, offsetY;
+        static int offsetX, offsetY;
         size_t type;
         sf::Texture texture;
         sf::Sprite sprite;
