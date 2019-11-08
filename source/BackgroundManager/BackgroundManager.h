@@ -34,7 +34,7 @@ class BackgroundManager final
 
         constexpr static size_t BACKGROUND_COUNT = 8u;
 
-        const std::string PATH_TO_BACKGROUND = "resources/Backgrounds/";
+        const std::string PATH_TO_BACKGROUND = "resources/Textures/Backgrounds/";
         const std::string EXTENSION = ".jpg";
 
         sf::Sprite image;

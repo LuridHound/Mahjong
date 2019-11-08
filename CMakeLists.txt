@@ -28,6 +28,9 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include ${SFML_LIB}/include)
 set(SOURCE
         ${CMAKE_SOURCE_DIR}/main.cpp
         ${CMAKE_SOURCE_DIR}/source/BackgroundManager/BackgroundManager.cpp
+        ${CMAKE_SOURCE_DIR}/source/Rune/Rune.cpp
+        ${CMAKE_SOURCE_DIR}/source/GameEngine/GameEngine.cpp
+        ${CMAKE_SOURCE_DIR}/source/Geometry/Geometry.cpp
         )
 
 # LINK EXTERNAL LIBRARIES TO EXECUTABLE
