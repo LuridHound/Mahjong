@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <random>
 
 
 //
@@ -27,9 +28,19 @@ bool Geometry::isFree(int x_, int y_, int z)
     int x = field[x_][y_][z].x;
     int y = field[x_][y_][z].y;
 
-    for ( int i = z; i < MAX_DEPTH; ++i )
+    for(int i = z + 1; i < MAX_DEPTH; ++i)
     {
-        if ( !(field[x - 2][y][i].info || field[x + 2][y][i].info) )
+        for ( int j = 0; j < 2; ++j )
+            for ( int k = 0; k < 2; ++k )
+        if ( field[x + j][y + k][i].info )
+        {
+            return false;
+        }
+    }
+
+    for ( int i = 0; i <= z; ++i )
+    {
+        if( (!field[x - 1][y][i].info && !field[x - 1][y + 1][i].info) || (!field[x + 2][y][i].info && !field[x + 2][y + 1][i].info) )
         {
             return true;
         }
@@ -70,24 +81,38 @@ bool Geometry::isFree(const int id_first, const int id_second)
 }
 
 
+//
+//
+[[nodiscard]]
+bool isFree(Rune* rune)
+{
+
+}
+
 
 //
 //
 [[nodiscard]]
 Rune* Geometry::getRune(int x, int y)
 {
+    int x_1 = -1, y_1 = -1, z_1 = -1;
     Rune* rune = nullptr;
     for ( int z = 0; z < MAX_DEPTH; ++z )
     {
-        int x_ = field[(x / 27)][(y / 45)][z].x;
-        int y_ = field[(x / 27)][(y / 45)][z].y;
+        int x_ = field[((x - (54 / 12) * z)/ 27)][((y + (90 / 12) * z) / 45)][z].x;
+        int y_ = field[((x - (54 / 12) * z)/ 27)][((y + (90 / 12) * z) / 45)][z].y;
         if ( x_ == -1 || y_ == -1 )
+            continue;
+        if(x_ > MAX_WIDTH || y_ > MAX_HEIGHT)
             continue;
         if ( field[x_][y_][z].info == true )
 
         rune = (*std::find_if(runes.begin(), runes.end(), [&](Rune* rune){
             if ( field[x_][y_][z].id == rune->getID() )
             {
+                x_1 = x_;
+                y_1 = y_;
+                z_1 = z;
                 return true;
             }
             return false;
@@ -95,7 +120,62 @@ Rune* Geometry::getRune(int x, int y)
         }));
     }
 
-    return rune;
+    if(x_1 == -1)
+    {
+        return nullptr;
+    }
+
+    if ( isFree( x_1, y_1, z_1 ) )
+        return rune;
+    else
+        return nullptr;
+}
+
+
+//  TODO
+//  It must be guaranteed that the number of runes is even.
+void Geometry::generateRunes()
+{
+    std::vector<int> vec;
+/*
+    int first, second, temp;
+    first = id / RUNES_COUNT;
+    second = id / RUNES_COUNT;
+    temp = id - id / RUNES_COUNT * RUNES_COUNT;
+
+    if(first & 1)
+    {
+        --first;
+        ++second;
+    }
+    */
+    for(int i = 0; i < id; ++i)
+    {
+      //  if(i & 1)
+        vec.push_back(id / RUNES_COUNT);
+    //    else
+
+    }
+  /*  if(i & 1)
+            else
+
+    if(temp > 0)
+    {
+        temp -= 2;
+    }
+
+    // TODO
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(vec.begin(), vec.end(), g);
+
+*/
+    for(int i = 0; i < id; ++i)
+    {
+        runes[i]->setRuneType(vec[i]);
+    }
+
+    return;
 }
 
 
@@ -103,7 +183,7 @@ Rune* Geometry::getRune(int x, int y)
 //
 void Geometry::loadLevel()
 {
-    std::fstream file("resources/Levels/Level.txt");
+    std::fstream file("resources/Levels/3.txt");
     for ( int y = 0; y < MAX_HEIGHT; ++y )
         for ( int x = 0; x < MAX_WIDTH; ++x )
         {
@@ -138,6 +218,7 @@ void Geometry::loadLevel()
         runes[i]->z = positions[i].z;
 
     }
+    generateRunes();
 
     std::sort(runes.begin(), runes.end(),
             [](Rune* first, Rune* second)
