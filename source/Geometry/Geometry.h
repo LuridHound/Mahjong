@@ -13,8 +13,6 @@ class Geometry final
 public :
     void draw(sf::RenderWindow* window);
 
-    void deleteById(const int first_id, const int second_id);
-
     void deleteRunes(Rune* first, Rune* second);
 
     [[nodiscard]]
@@ -26,7 +24,7 @@ public :
     void fillRectangle(int x, int y, int z);
 
     [[nodiscard]]
-    int getRuneID(int x, int y);
+    Rune* getRune(int x, int y);
 
     void loadLevel();
 
@@ -34,8 +32,13 @@ public :
 
     [[nodiscard]]
     bool isEmpty() const;
-public :
-
+private :
+    struct Position
+            {
+            public :
+                int x, y, z;
+            };
+    std::vector<Position> positions;
     int id = 0;
     //beware
     struct Tile

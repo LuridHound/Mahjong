@@ -10,6 +10,7 @@ void Geometry::draw(sf::RenderWindow *window)
 {
     for ( auto& rune : runes )
     {
+        if(rune != nullptr)
         rune->draw(window);
     }
 
@@ -53,11 +54,7 @@ void Geometry::fillRectangle(int x, int y, int z)
         }
     }
 
-    runes.push_back(new Rune(id));
-    runes[runes.size() - 1]->setPosition(x, y, z);
-    runes[runes.size() - 1]->x = x;
-    runes[runes.size() - 1]->y = y;
-    runes[runes.size() - 1]->z = z;
+    positions.push_back(Position{x, y, z});
 
     return;
 }
@@ -77,22 +74,28 @@ bool Geometry::isFree(const int id_first, const int id_second)
 //
 //
 [[nodiscard]]
-int Geometry::getRuneID(int x, int y)
+Rune* Geometry::getRune(int x, int y)
 {
-    int id = -1;
-    for(int z = 0; z < MAX_DEPTH; ++z)
+    Rune* rune = nullptr;
+    for ( int z = 0; z < MAX_DEPTH; ++z )
     {
-        std :: cout << "X" << (x ) / 27 ;
-        std::cout << "Y" << (y) / 45 << '\n';
-        int x_ = field[(x / 27/*  - (27 / 12) * 3 * z) / 27 */)][(y / 45/* + (45 / 12) * 3 * z) / 45*/)][z].x;
-        int y_ = field[(x / 27/* - (27 / 12) * 3 * z) / 27  */)][(y / 45/*+ (45 / 12) * 3 * z) / 45 */)][z].y;
-        if(x_ == -1 || y_ == -1)
+        int x_ = field[(x / 27)][(y / 45)][z].x;
+        int y_ = field[(x / 27)][(y / 45)][z].y;
+        if ( x_ == -1 || y_ == -1 )
             continue;
-                if(field[x_][y_][z].info == true)
-                    id = field[x_][y_][z].id;
+        if ( field[x_][y_][z].info == true )
+
+        rune = (*std::find_if(runes.begin(), runes.end(), [&](Rune* rune){
+            if ( field[x_][y_][z].id == rune->getID() )
+            {
+                return true;
+            }
+            return false;
+
+        }));
     }
 
-    return id;
+    return rune;
 }
 
 
@@ -118,10 +121,32 @@ void Geometry::loadLevel()
 
         }
 
-    std::cout << id;
+    for ( auto& rune : runes )
+    {
+        rune->setRuneType(2);
+    }
 
-        std::sort(runes.begin(), runes.end(), [](Rune* first, Rune* second){if(first->z < second->z) return true;
-        return false;});
+    runes.reserve(id);
+
+    for ( int i = 0; i < id; ++i )
+    {
+        runes.push_back(new Rune(i));
+        runes[i]->setRuneType(rand() % 30);
+        runes[i]->setPosition(positions[i].x, positions[i].y, positions[i].z);
+        runes[i]->x = positions[i].x;
+        runes[i]->y = positions[i].y;
+        runes[i]->z = positions[i].z;
+
+    }
+
+    std::sort(runes.begin(), runes.end(),
+            [](Rune* first, Rune* second)
+            {
+                if(first->z < second->z)
+                    return true;
+                return false;
+            }
+            );
 
     return;
 }
@@ -129,29 +154,38 @@ void Geometry::loadLevel()
 
 //
 //
-void Geometry::clearCell(int x, int y, int z)
+void Geometry::clearCell(const int X, const int Y, const int Z)
 {
-    for(int i = 0; i < 2; ++i)
+    for ( int i = 0; i < 2; ++i )
     {
         for(int j = 0; j < 2; ++j)
         {
-            field[x + i][y + j][z].info = false;
+            field[X + i][Y + j][Z].info = false;
         }
     }
+
+    return;
 }
 
 
 //
 //
-void Geometry::deleteById(const int first_id, const int second_id)
+void Geometry::deleteRunes(Rune* first, Rune* second)
 {
-    runes.erase(std::remove_if(runes.begin(), runes.end(), [&](Rune* rune){if(rune->getID() == first_id || rune->getID() == second_id){
-        clearCell(rune->x, rune->y, rune->z);
-        return true;}
-    return false;}
+    runes.erase(std::remove_if(runes.begin(), runes.end(),
+            [&](Rune* rune)
+            {
+                if ( rune->getID() == first->getID() || rune->getID() == second->getID() )
+                {
+                    clearCell(rune->x, rune->y, rune->z);
+                    return true;
+                }
+                return false;
+            }
     ), runes.end());
-}
 
+    return;
+}
 
 
 //
