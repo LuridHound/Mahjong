@@ -1,6 +1,21 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Event.hpp>
+#include <iostream>
 #include "GameEngine.h"
+
+
+//
+//
+[[nodiscard]]
+bool isOneType(Rune* first, Rune* second)
+{
+    if ( first->getType() == second->getType() )
+    {
+        return true;
+    }
+
+    return false;
+}
 
 
 //
@@ -9,8 +24,7 @@ void GameEngine::run()
 {
 
 
-    int id_first = -1, id_second = -1;
-
+    Rune* first = nullptr, *second = nullptr;
     while(window->isOpen())
     {
         sf::Event event;
@@ -25,26 +39,46 @@ void GameEngine::run()
                 //  if pressed on the second rune and the type of 1-st and 2-nd rune is equal - delete them and unhighlight
                 //  else unhighlight them.
                 //
+                int x = sf::Mouse::getPosition().x;
+                int y = sf::Mouse::getPosition().y;
 
-                if(id_first == -1)
+                if(first == nullptr)
                 {
-                    int x = sf::Mouse::getPosition().x;
-                    int y = sf::Mouse::getPosition().y;
-                    id_first = geometry.getRuneID(x, y);
+                    first = geometry.getRune(x, y);
+                    if ( first != nullptr )
+                    {
+                        std::cout << first->getID();
+                        first->highlight();
+                    }
                 }
                 else
                 {
-                    int x = sf::Mouse::getPosition().x;
-                    int y = sf::Mouse::getPosition().y;
-                    id_second = geometry.getRuneID(x, y);
-                    if(id_first == id_second || id_second == -1)
+                    second = geometry.getRune(x, y);
+                    if ( second == nullptr)
                     {
-                        id_first = -1;
                         break;
                     }
-                    if(geometry.isFree(id_first, id_second))
-                        geometry.deleteById(id_first, id_second);
-                    id_first = -1;
+                    if ( first == second )
+                    {
+                        first->unhighlight();
+                        first = second = nullptr;
+                    }
+
+                    if ( second == nullptr )
+                    {
+                        break;
+                    }
+
+                    first->unhighlight();
+                    second->unhighlight();
+
+                    std::cout << "COMPARE";
+                    std::cout << first->getType() << ' ' << second->getType() << '\n';
+
+                    if ( first->getType() == second->getType() )
+                    geometry.deleteRunes(first, second);
+                    first = nullptr;
+                    second = nullptr;
                 }
             }
 
