@@ -14,14 +14,21 @@
 class Rune final
 {
     public :
-        Rune();
+        Rune(int id);
+
+        void setPosition(int x, int y, int z);
 
         [[nodiscard]]
         size_t getType() const;
 
-        void draw(sf::RenderWindow* window);
+        [[nodiscard]]
+        int getID() const;
 
+        void draw(sf::RenderWindow* window);
+        int x, y, z;    // get rid
     private :
+        int id;
+        int offset_x, offset_y;
         size_t type;
         sf::Texture texture;
         sf::Sprite sprite;
