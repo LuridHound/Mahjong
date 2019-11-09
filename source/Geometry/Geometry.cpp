@@ -162,7 +162,7 @@ void Geometry::generateRunes()
     {
         if ( runeType[j] != 0 )
         {
-            vec.push_back(runeType[j]);
+            vec.push_back(j);
             --runeType[j];
         }
         else
@@ -174,6 +174,9 @@ void Geometry::generateRunes()
 
     std::random_device rd;
     std::mt19937 g(rd());
+    std::shuffle(vec.begin(), vec.end(), g);
+    std::shuffle(vec.begin(), vec.end(), g);
+    std::shuffle(vec.begin(), vec.end(), g);
     std::shuffle(vec.begin(), vec.end(), g);
 
     for ( int i = 0; i < id; ++i )
