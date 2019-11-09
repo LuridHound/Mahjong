@@ -122,45 +122,61 @@ Rune* Geometry::getRune(int x, int y)
 }
 
 
-//  TODO
+//
 //  It must be guaranteed that the number of runes is even.
 void Geometry::generateRunes()
 {
     std::vector<int> vec;
-/*
+
     int first, second, temp;
     first = id / RUNES_COUNT;
     second = id / RUNES_COUNT;
     temp = id - id / RUNES_COUNT * RUNES_COUNT;
 
-    if(first & 1)
+    if ( first & 1 )
     {
         --first;
         ++second;
     }
-    */
-    for(int i = 0; i < id; ++i)
+
+    std::vector<int> runeType;
+
+    for ( int i = 0; i < RUNES_COUNT; ++i )
     {
-      //  if(i & 1)
-        vec.push_back(id / RUNES_COUNT);
-    //    else
 
+        if ( i & 1 )
+        {
+            runeType.push_back(first + 2 * (temp ? 1 : 0));
+        }
+        else
+        {
+            runeType.push_back(second + 2 * (temp ? 1 : 0));
+        }
+        if(temp > 0)
+        {
+            temp -= 2;
+        }
     }
-  /*  if(i & 1)
-            else
 
-    if(temp > 0)
+    for ( int i = 0, j = 0; i < id; ++i )
     {
-        temp -= 2;
+        if ( runeType[j] != 0 )
+        {
+            vec.push_back(runeType[j]);
+            --runeType[j];
+        }
+        else
+        {
+            ++j;
+            --i;
+        }
     }
 
-    // TODO
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(vec.begin(), vec.end(), g);
 
-*/
-    for(int i = 0; i < id; ++i)
+    for ( int i = 0; i < id; ++i )
     {
         runes[i]->setRuneType(vec[i]);
     }
