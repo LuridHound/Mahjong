@@ -20,6 +20,8 @@ class GameEngine final
 
     private :
 
+        void initializeWindow();
+
         const char* title = "Mahjong";
 
         BackgroundManager backgroundManager;

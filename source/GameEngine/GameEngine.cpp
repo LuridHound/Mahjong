@@ -85,7 +85,6 @@ void GameEngine::run()
 
         backgroundManager.draw(window);
         geometry.draw(window);
-
         window->display();
     }
 
@@ -97,8 +96,25 @@ void GameEngine::run()
 //
 GameEngine::GameEngine()
 {
-    window = new sf::RenderWindow(sf::VideoMode(1920, 1080), title, sf::Style::Fullscreen);
+
+    initializeWindow();
 
     backgroundManager.changeBackground();
-    geometry.loadLevel();
+    geometry.loadLevel(2);
+}
+
+
+//
+//
+void GameEngine::initializeWindow()
+{
+
+    sf::Image icon;
+    icon.loadFromFile("resources/Textures/Runes/0.png");
+
+    window = new sf::RenderWindow(sf::VideoMode(1920, 1080), title, sf::Style::Fullscreen);
+
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    return;
 }
