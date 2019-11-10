@@ -29,8 +29,9 @@ namespace Enums
     }
 
 
-    enum class Level : int
+    enum class UserChoice : int
      {
+        MENU = 0,
         FIRST = 1,
         SECOND = 2,
         THIRD = 3,

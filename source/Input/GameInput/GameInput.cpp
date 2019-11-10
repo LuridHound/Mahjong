@@ -12,6 +12,7 @@ void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry)
 */
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
+        user->setLevel(Enums::UserChoice::MENU);
         stage = Enums::Stage::MENU;
         user->setInput(new MenuInput());
     }

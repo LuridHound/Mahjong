@@ -42,8 +42,7 @@ void GameEngine::run()
             if ( event.type == sf::Event::Closed )
             {
                 window->close();
-            }
-
+            }/*
             if ( event.type == sf::Event::MouseButtonPressed )
             {
                 //  press button and get the Rune and highlight it
@@ -89,32 +88,27 @@ void GameEngine::run()
                     first = nullptr;
                     second = nullptr;
                 }
-            }
+            }*/
 
         }
-
-        if(stage != Enums::Stage::MENU)
-        if(user->levelChoice() != tempLevel)
-        {
-            backgroundManager->changeBackground(static_cast<Enums::Background::Background >(tempLevel));
-        }
-
-        tempLevel = user->levelChoice();
         user->update(stage, &geometry);
+
+        if ( user->levelChoice() != tempLevel )
+        {
+            tempLevel = user->levelChoice();
+            backgroundManager->changeBackground(static_cast<Enums::Background::Background>(static_cast<int>(tempLevel)));
+            user->clear();
+            geometry.clear();
+            if(stage != Enums::Stage::MENU)
+            geometry.loadLevel(static_cast<int>(tempLevel));
+        }
+
+
         window->clear();
 
         backgroundManager->draw(window);
-        if(stage != Enums::Stage::MENU)
-        {
-            backgroundManager->changeBackground(Enums::Background::Background::FIRST_LEVEL);
-        }
-        else
-            {
-            backgroundManager->changeBackground(Enums::Background::Background::MENU);
-            }
 
-
-
+        if(stage == Enums::Stage::GAME)
         geometry.draw(window, stage, backgroundManager);
         window->display();
     }
@@ -131,6 +125,7 @@ stage(Enums::Stage::MENU)
     user = new User();
     initializeWindow();
 
+    tempLevel = user->levelChoice();
     backgroundManager = new BackgroundManager();
 
     backgroundManager->changeBackground(Enums::Background::Background::MENU);
@@ -142,6 +137,7 @@ stage(Enums::Stage::MENU)
 //
 void GameEngine::initializeWindow()
 {
+
     sf::Image icon;
     icon.loadFromFile("resources/Textures/Runes/0.png");
 

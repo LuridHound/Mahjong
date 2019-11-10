@@ -33,7 +33,7 @@ class GameEngine final
         Geometry geometry;
         User* user;
 
-        Enums::Level tempLevel;
+        Enums::UserChoice tempLevel;
 
         sf::RenderWindow* window;
 };

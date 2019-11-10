@@ -33,12 +33,15 @@ class Geometry final
         [[nodiscard]]
         bool isEmpty() const;
 
+        void clear();
+
     private :
 
         void clearCell(int x, int y, int z);
 
         void fillRectangle(int x, int y, int z);
         void generateRunes();
+
 
     struct Position
                 {

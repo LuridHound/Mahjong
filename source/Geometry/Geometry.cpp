@@ -10,31 +10,12 @@
 //
 void Geometry::draw( sf::RenderWindow *window, const Enums::Stage stage, BackgroundManager* backgroundManager )
 {
-    switch ( stage )
-    {
-        case Enums::Stage::MENU :
-        {
-            backgroundManager->changeBackground(Enums::Background::Background::MENU);
-            break;
-        }
-
-        case Enums::Stage::GAME :
-        {
-            backgroundManager->changeBackground(Enums::Background::Background::FIRST_LEVEL);
-
             for ( auto& rune : runes )
             {
                 if(rune != nullptr)
                     rune->draw(window);
             }
-            break;
-        }
 
-        default :
-            {
-                std::terminate();
-            }
-    }
 
     return;
 }
@@ -212,7 +193,7 @@ void Geometry::generateRunes()
 //
 void Geometry::loadLevel(const int LEVEL)
 {
-    std::fstream file("resources/Levels/" + std::to_string(3) + ".txt");
+    std::fstream file("resources/Levels/" + std::to_string(LEVEL) + ".txt");
     for ( int y = 0; y < MAX_HEIGHT; ++y )
         for ( int x = 0; x < MAX_WIDTH; ++x )
         {
@@ -303,4 +284,32 @@ void Geometry::deleteRunes(Rune* first, Rune* second)
 bool Geometry::isEmpty() const
 {
     return runes.empty();
+}
+
+
+//
+//
+void Geometry::clear()
+{
+    id = 0;
+    Tile tile;
+
+    for(int x = 0; x < MAX_WIDTH; ++x)
+    {
+        for(int y = 0; y < MAX_HEIGHT; ++y)
+        {
+            for(int z = 0; z < MAX_DEPTH; ++z)
+            {
+                field[x][y][z] = tile;
+            }
+        }
+    }
+
+    positions.clear();
+
+    for(size_t i = 0; i < runes.size(); ++i)
+    {
+        delete runes[i];
+    }
+    runes.clear();
 }

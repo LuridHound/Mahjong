@@ -22,13 +22,15 @@ public :
 
         void setRune(Rune* rune);
 
-        void setLevel(const Enums::Level level);
+        void setLevel(const Enums::UserChoice level);
 
-        Enums::Level levelChoice();
+        Enums::UserChoice levelChoice();
+
+        void clear();
     private :
         Input* input;
 
-        Enums::Level choice;
+        Enums::UserChoice choice;
 
         Rune* first;
         Rune* second;

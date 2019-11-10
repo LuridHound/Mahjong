@@ -5,6 +5,7 @@
 //
 //
 User::User():
+choice{Enums::UserChoice::MENU},
 input(new MenuInput())
 {
 
@@ -17,6 +18,8 @@ void User::setInput(Input* input_)
 {
     delete input;
     input = input_;
+
+    return;
 }
 
 
@@ -50,7 +53,7 @@ void User::setRune(Rune *rune)
 
 //
 //
-Enums::Level User::levelChoice()
+Enums::UserChoice User::levelChoice()
 {
     return choice;
 }
@@ -58,9 +61,19 @@ Enums::Level User::levelChoice()
 
 //
 //
-void User::setLevel(const Enums::Level level)
+void User::setLevel(const Enums::UserChoice level)
 {
     choice = level;
+
+    return;
+}
+
+
+//
+//
+void User::clear()
+{
+    first = second = nullptr;
 
     return;
 }
