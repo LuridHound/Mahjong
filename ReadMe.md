@@ -6,4 +6,4 @@ https://kenney.nl/assets/rune-pack
 )
 
 
-![Logo](https://github.com//Solisuom/SpaceInvaders/blob/master/resources/Screenshots/Logo.png?raw=true)
+![Logo](https://github.com//Solisuom/Mahjong/blob/master/resources/Screenshots/Logo.png?raw=true)
