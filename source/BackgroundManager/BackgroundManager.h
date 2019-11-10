@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "../Enums.h"
 
 
 //  TODO
@@ -26,20 +27,20 @@ class BackgroundManager final
 
         BackgroundManager();
 
-        void changeBackground();
+        void changeBackground(const Enums::Background::Background LEVEL);
 
         void draw(sf::RenderWindow* window);
 
     private:
 
-        constexpr static size_t BACKGROUND_COUNT = 8u;
+        constexpr static size_t BACKGROUND_COUNT = 9u;
 
         const std::string PATH_TO_BACKGROUND = "resources/Textures/Backgrounds/";
         const std::string EXTENSION = ".jpg";
 
         sf::Sprite image;
 
-        std::array<sf::Texture*, BACKGROUND_COUNT>  textures;
+        std::array<sf::Texture*, Enums::Background::BACKGROUND_COUNT>  textures;
 };
 
 
