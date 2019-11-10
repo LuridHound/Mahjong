@@ -22,7 +22,18 @@ bool isOneType(Rune* first, Rune* second)
 //
 void GameEngine::run()
 {
+    sf::Cursor cursor;
+
+    sf::Texture image;
+    image.loadFromFile("resources/Oxygen.rgba");
+
+    cursor.loadFromPixels(image.copyToImage().getPixelsPtr(), sf::Vector2u(32, 32), sf::Vector2u(0, 0));
+
+    window->setMouseCursor(cursor);
+
     Rune* first = nullptr, *second = nullptr;
+
+    window->setFramerateLimit(60);
     while ( window->isOpen() )
     {
         sf::Event event;
@@ -81,10 +92,30 @@ void GameEngine::run()
             }
 
         }
+
+        if(stage != Enums::Stage::MENU)
+        if(user->levelChoice() != tempLevel)
+        {
+            backgroundManager->changeBackground(static_cast<Enums::Background::Background >(tempLevel));
+        }
+
+        tempLevel = user->levelChoice();
+        user->update(stage, &geometry);
         window->clear();
 
-        backgroundManager.draw(window);
-        geometry.draw(window);
+        backgroundManager->draw(window);
+        if(stage != Enums::Stage::MENU)
+        {
+            backgroundManager->changeBackground(Enums::Background::Background::FIRST_LEVEL);
+        }
+        else
+            {
+            backgroundManager->changeBackground(Enums::Background::Background::MENU);
+            }
+
+
+
+        geometry.draw(window, stage, backgroundManager);
         window->display();
     }
 
@@ -94,12 +125,15 @@ void GameEngine::run()
 
 //
 //
-GameEngine::GameEngine()
+GameEngine::GameEngine():
+stage(Enums::Stage::MENU)
 {
-
+    user = new User();
     initializeWindow();
 
-    backgroundManager.changeBackground();
+    backgroundManager = new BackgroundManager();
+
+    backgroundManager->changeBackground(Enums::Background::Background::MENU);
     geometry.loadLevel(2);
 }
 
@@ -108,7 +142,6 @@ GameEngine::GameEngine()
 //
 void GameEngine::initializeWindow()
 {
-
     sf::Image icon;
     icon.loadFromFile("resources/Textures/Runes/0.png");
 

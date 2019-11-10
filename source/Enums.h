@@ -28,6 +28,19 @@ namespace Enums
         constexpr static size_t BACKGROUND_COUNT = 9u;
     }
 
+
+    enum class Level : int
+     {
+        FIRST = 1,
+        SECOND = 2,
+        THIRD = 3,
+        FORTH = 4,
+        FIFTH = 5,
+        SIXTH = 6,
+        SEVENTH = 7,
+        EIGHT = 8
+     };
+
 }
 
 

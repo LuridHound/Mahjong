@@ -2,10 +2,13 @@
 #define MAHJONG_GAMEENGINE_H
 
 
+#include "../Enums.h"
+
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include "../BackgroundManager/BackgroundManager.h"
 #include "../Geometry/Geometry.h"
+#include "../User/User.h"
 
 
 //
@@ -24,8 +27,13 @@ class GameEngine final
 
         const char* title = "Mahjong";
 
-        BackgroundManager backgroundManager;
+        Enums::Stage stage;
+
+        BackgroundManager* backgroundManager;
         Geometry geometry;
+        User* user;
+
+        Enums::Level tempLevel;
 
         sf::RenderWindow* window;
 };
