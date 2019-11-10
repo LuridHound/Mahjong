@@ -1,4 +1,5 @@
 #include "Geometry.h"
+#include "../BackgroundManager/BackgroundManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -7,14 +8,33 @@
 
 //
 //
-void Geometry::draw(sf::RenderWindow *window)
+void Geometry::draw( sf::RenderWindow *window, const Enums::Stage stage, BackgroundManager* backgroundManager )
 {
-    for ( auto& rune : runes )
+    switch ( stage )
     {
-        if(rune != nullptr)
-        rune->draw(window);
-    }
+        case Enums::Stage::MENU :
+        {
+            backgroundManager->changeBackground(Enums::Background::Background::MENU);
+            break;
+        }
 
+        case Enums::Stage::GAME :
+        {
+            backgroundManager->changeBackground(Enums::Background::Background::FIRST_LEVEL);
+
+            for ( auto& rune : runes )
+            {
+                if(rune != nullptr)
+                    rune->draw(window);
+            }
+            break;
+        }
+
+        default :
+            {
+                std::terminate();
+            }
+    }
 
     return;
 }
@@ -192,7 +212,7 @@ void Geometry::generateRunes()
 //
 void Geometry::loadLevel(const int LEVEL)
 {
-    std::fstream file("resources/Levels/" + std::to_string(LEVEL) + ".txt");
+    std::fstream file("resources/Levels/" + std::to_string(3) + ".txt");
     for ( int y = 0; y < MAX_HEIGHT; ++y )
         for ( int x = 0; x < MAX_WIDTH; ++x )
         {
@@ -204,7 +224,6 @@ void Geometry::loadLevel(const int LEVEL)
                 {
                     fillRectangle(x, y, z);
                     ++id;
-                    std::cout << id << '\n';
                 }
             }
 

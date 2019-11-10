@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../Rune/Rune.h"
+#include "../Enums.h"
+#include "../BackgroundManager/BackgroundManager.h"
 
 
 //
@@ -12,7 +14,7 @@ class Geometry final
 {
     public :
 
-        void draw(sf::RenderWindow* window);
+        void draw(sf::RenderWindow* window, const Enums::Stage stage, BackgroundManager* backgroundManager);
 
         void deleteRunes(Rune* first, Rune* second);
 
