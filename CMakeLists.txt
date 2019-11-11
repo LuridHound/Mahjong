@@ -28,6 +28,9 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include ${SFML_LIB}/include)
 set(SOURCE
         ${CMAKE_SOURCE_DIR}/main.cpp
         ${CMAKE_SOURCE_DIR}/source/User/User.cpp
+        ${CMAKE_SOURCE_DIR}/source/GameObject/GameObject.cpp
+        ${CMAKE_SOURCE_DIR}/source/EventManager/EventManager.cpp
+        ${CMAKE_SOURCE_DIR}/source/GameObject/GameObject.cpp
         ${CMAKE_SOURCE_DIR}/source/Input/Input.cpp
         ${CMAKE_SOURCE_DIR}/source/Input/GameInput/GameInput.cpp
         ${CMAKE_SOURCE_DIR}/source/Input/MenuInput/MenuInput.cpp
