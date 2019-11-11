@@ -37,7 +37,9 @@ class Rune final
         static int offsetX, offsetY;
         static int textureSizeX, textureSizeY;
 
-        constexpr static int FACTOR = 10;
+        constexpr static int FACTOR = 7;
+
+        bool ishHighlighted;
 
         const int ID;
 

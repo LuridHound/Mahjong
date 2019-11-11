@@ -7,6 +7,7 @@ int Rune::textureSizeX, Rune::textureSizeY;
 //
 //
 Rune::Rune(const int ID):
+ishHighlighted(false),
 ID(ID)
 {
     texture.loadFromFile("resources/Textures/Runes/0.png");
@@ -72,9 +73,13 @@ int Rune::getID() const
 
 //
 //
-void Rune::highlight()
+    void Rune::highlight()
 {
-    sprite.setColor(sf::Color(255, 255, 255, 215));
+    if ( !ishHighlighted )
+    {
+        sprite.setColor(sf::Color(255, 255, 255, 215));
+        ishHighlighted = true;
+    }
 
     return;
 }
@@ -84,7 +89,11 @@ void Rune::highlight()
 //
 void Rune::unhighlight()
 {
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    if ( ishHighlighted )
+    {
+        sprite.setColor(sf::Color(255, 255, 255, 255));
+        ishHighlighted = false;
+    }
 
     return;
 }
