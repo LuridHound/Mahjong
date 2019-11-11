@@ -9,6 +9,7 @@
 #include "../BackgroundManager/BackgroundManager.h"
 #include "../Geometry/Geometry.h"
 #include "../User/User.h"
+#include "../EventManager/EventManager.h"
 
 
 //
@@ -32,6 +33,8 @@ class GameEngine final
         BackgroundManager* backgroundManager;
         Geometry geometry;
         User* user;
+
+        EventManager* eventManager;
 
         Enums::UserChoice tempLevel;
 

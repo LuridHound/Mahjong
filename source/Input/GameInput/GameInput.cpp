@@ -5,58 +5,27 @@
 
 //
 //
-void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry)
+void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry, sf::Event* event)
 {
-    /*
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::))
-*/
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    if ( event->type == sf::Event::KeyPressed )
     {
-        user->setLevel(Enums::UserChoice::MENU);
-        stage = Enums::Stage::MENU;
-        user->setInput(new MenuInput());
-    }
-    int x = sf::Mouse::getPosition().x;
-    int y = sf::Mouse::getPosition().y;
-/*
-    user->setRune(geometry->getRune(x, y));
-
-    auto rune = geometry->getRune(x, y);
-
-    if ( rune == nullptr )
-    {
-        if ( first != nullptr )
+        if ( event->key.code == sf::Keyboard::Escape )
         {
-            first->highlight();
+            user->setLevel(Enums::UserChoice::MENU);
+            stage = Enums::Stage::MENU;
+            user->setInput(new MenuInput());
         }
     }
-    else
+
+    if ( event->type == sf::Event::MouseButtonPressed )
     {
-        second = geometry.getRune(x, y);
-        if ( second == nullptr )
-        {
-            break;
-        }
-        if ( first == second )
-        {
-            first->unhighlight();
-            first = second = nullptr;
-        }
+        int x = sf::Mouse::getPosition().x;
+        int y = sf::Mouse::getPosition().y;
 
-        if ( second == nullptr )
-        {
-            break;
-        }
+        auto rune = geometry->getRune(x, y);
 
-        first->unhighlight();
-        second->unhighlight();
-
-        if ( first->getType() == second->getType() )
-            geometry.deleteRunes(first, second);
-        first = nullptr;
-        second = nullptr;
+        user->setRune(rune);
     }
 
-*/
     return;
 }

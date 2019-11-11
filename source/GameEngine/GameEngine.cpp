@@ -42,56 +42,21 @@ void GameEngine::run()
             if ( event.type == sf::Event::Closed )
             {
                 window->close();
-            }/*
-            if ( event.type == sf::Event::MouseButtonPressed )
+            }
+
+            if(stage == Enums::Stage::MENU)
+            if(event.type == sf::Event::KeyPressed)
             {
-                //  press button and get the Rune and highlight it
-                //  if pressed second time on the same rune - unhighlight it
-                //  if pressed on the second rune and the type of 1-st and 2-nd rune is equal - delete them and unhighlight
-                //  else unhighlight them.
-                //
-                int x = sf::Mouse::getPosition().x;
-                int y = sf::Mouse::getPosition().y;
-
-                if ( first == nullptr )
+                if(event.key.code == sf::Keyboard::Escape)
                 {
-                    first = geometry.getRune(x, y);
-                    if ( first != nullptr )
-                    {
-                        std::cout << first->getID();
-                        first->highlight();
-                    }
+                    window->close();
                 }
-                else
-                {
-                    second = geometry.getRune(x, y);
-                    if ( second == nullptr )
-                    {
-                        break;
-                    }
-                    if ( first == second )
-                    {
-                        first->unhighlight();
-                        first = second = nullptr;
-                    }
+            }
 
-                    if ( second == nullptr )
-                    {
-                        break;
-                    }
+            eventManager->pushEvent(&event);
 
-                    first->unhighlight();
-                    second->unhighlight();
-
-                    if ( first->getType() == second->getType() )
-                    geometry.deleteRunes(first, second);
-                    first = nullptr;
-                    second = nullptr;
-                }
-            }*/
-
+            user->update(stage, &geometry);
         }
-        user->update(stage, &geometry);
 
         if ( user->levelChoice() != tempLevel )
         {
@@ -100,17 +65,17 @@ void GameEngine::run()
             user->clear();
             geometry.clear();
             if(stage != Enums::Stage::MENU)
-            geometry.loadLevel(static_cast<int>(tempLevel));
+                geometry.loadLevel(static_cast<int>(tempLevel));
         }
-
 
         window->clear();
 
         backgroundManager->draw(window);
 
         if(stage == Enums::Stage::GAME)
-        geometry.draw(window, stage, backgroundManager);
+            geometry.draw(window, stage, backgroundManager);
         window->display();
+
     }
 
     return;
@@ -127,6 +92,9 @@ stage(Enums::Stage::MENU)
 
     tempLevel = user->levelChoice();
     backgroundManager = new BackgroundManager();
+
+    eventManager = new EventManager();
+    eventManager->subscribe(user);
 
     backgroundManager->changeBackground(Enums::Background::Background::MENU);
     geometry.loadLevel(2);
