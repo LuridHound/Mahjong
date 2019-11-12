@@ -47,7 +47,7 @@ class Geometry final
                 };
         std::vector<Position> positions;
         int id = 0;
-        //beware
+
         struct Tile
                 {
                     int x = - 1, y = -1;

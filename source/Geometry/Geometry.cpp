@@ -95,8 +95,8 @@ Rune* Geometry::getRune(int x, int y)
     Rune* rune = nullptr;
     for ( int z = 0; z < MAX_DEPTH; ++z )
     {
-        int x_ = field[((x - (54 / 12) * z)/ 27)][((y + (90 / 12) * z) / 45)][z].x;
-        int y_ = field[((x - (54 / 12) * z)/ 27)][((y + (90 / 12) * z) / 45)][z].y;
+        int x_ = field[((x - (Rune::getOffset().x) * z)/ (Rune::getTextureSize().x / 2) )][((y + (Rune::getOffset().y) * z) / (Rune::getTextureSize().y / 2))][z].x;
+        int y_ = field[((x - (Rune::getOffset().x) * z)/ (Rune::getTextureSize().x / 2)) ][((y + (Rune::getOffset().y) * z) / (Rune::getTextureSize().y / 2))][z].y;
         if ( x_ == -1 || y_ == -1 )
             continue;
         if(x_ > MAX_WIDTH || y_ > MAX_HEIGHT)
@@ -227,17 +227,18 @@ void Geometry::loadLevel(const int LEVEL)
         runes.push_back(new Rune(i));
         runes[i]->setRuneType(rand() % 30);
         runes[i]->setPosition(positions[i].x, positions[i].y, positions[i].z);
+        /*
         runes[i]->x = positions[i].x;
         runes[i]->y = positions[i].y;
         runes[i]->z = positions[i].z;
-
+*/
     }
     generateRunes();
 
     std::sort(runes.begin(), runes.end(),
             [](Rune* first, Rune* second)
             {
-                if(first->z < second->z)
+                if(first->getPosition().z < second->getPosition().z)
                     return true;
                 return false;
             }
@@ -272,7 +273,8 @@ void Geometry::deleteRunes(Rune* first, Rune* second)
             {
                 if ( rune->getID() == first->getID() || rune->getID() == second->getID() )
                 {
-                    clearCell(rune->x, rune->y, rune->z);
+                    sf::Vector3i position = rune->getPosition();
+                    clearCell(position.x, position.y, position.z);
                     return true;
                 }
                 return false;

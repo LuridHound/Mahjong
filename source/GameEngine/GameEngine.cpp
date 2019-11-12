@@ -106,7 +106,9 @@ void GameEngine::initializeWindow()
     sf::Image icon;
     icon.loadFromFile("resources/Textures/Runes/0.png");
 
-    window = new sf::RenderWindow(sf::VideoMode(1920, 1080), title, sf::Style::Fullscreen);
+    sf::VideoMode videoMode(sf::VideoMode().getDesktopMode());
+
+    window = new sf::RenderWindow(videoMode, title, sf::Style::Fullscreen);
 
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 

@@ -7,6 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System.hpp>
 
 
 //
@@ -27,10 +28,18 @@ class Rune final
 
         void setRuneType(const int TYPE);
         void draw(sf::RenderWindow* window);
-        int x, y, z;    // get rid
+
+        [[nodiscard]]
+        sf::Vector3i getPosition()
+        {
+            return sf::Vector3i(x, y, z);
+        };
 
         void highlight();
         void unhighlight();
+
+        static sf::Vector2i getOffset();
+        static sf::Vector2i getTextureSize();
 
     private :
 
@@ -40,6 +49,8 @@ class Rune final
         constexpr static int FACTOR = 7;
 
         bool ishHighlighted;
+
+        int x, y, z;
 
         const int ID;
 

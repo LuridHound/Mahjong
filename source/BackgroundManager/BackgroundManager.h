@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+
 #include "../Enums.h"
 
 
@@ -30,7 +31,8 @@ class BackgroundManager final
                              PICTURES_RIGHT = 4;
 
         const int BLOCK_SIZE_Y = 270,
-                BLOCK_SIZE_X = 270;
+                  BLOCK_SIZE_X = 270;
+
         const std::string PATH_TO_BACKGROUND = "resources/Textures/Backgrounds/";
         const std::string EXTENSION = ".jpg";
 

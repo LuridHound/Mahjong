@@ -58,6 +58,10 @@ void Rune::setPosition(const int X, const int Y, const int Z)
     sprite.setPosition(textureSizeX * (X / 2) + (textureSizeX / 2) * (X % 2) + Z * offsetX,
                        textureSizeY * (Y / 2) + (textureSizeY / 2) * (Y % 2) - Z * offsetY);
 
+    x = X;
+    y = Y;
+    z = Z;
+
     return;
 }
 
@@ -96,4 +100,20 @@ void Rune::unhighlight()
     }
 
     return;
+}
+
+
+//
+//
+sf::Vector2i Rune::getOffset()
+{
+    return sf::Vector2i(offsetX, offsetY);
+}
+
+
+//
+//
+sf::Vector2i Rune::getTextureSize()
+{
+    return sf::Vector2i(textureSizeX, textureSizeY);
 }
