@@ -22,14 +22,6 @@ bool isOneType(Rune* first, Rune* second)
 //
 void GameEngine::run()
 {
-    sf::Cursor cursor;
-
-    sf::Texture image;
-    image.loadFromFile("resources/Cursor.png");
-
-    //cursor.loadFromPixels(image.copyToImage().getPixelsPtr(), sf::Vector2u(30, 30), sf::Vector2u(0, 0));
-
-    window->setMouseCursor(cursor);
 
     Rune* first = nullptr, *second = nullptr;
 
