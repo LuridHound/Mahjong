@@ -3,6 +3,9 @@
 
 #include <cstddef>
 
+
+//
+//
 namespace Enums
 {
     enum class Stage : int
@@ -13,8 +16,10 @@ namespace Enums
 
     //  TODO
     //  Check typos.
-    namespace Background {
-        enum class Background : int {
+    namespace Background
+    {
+        enum class Background : int
+        {
             MENU = 0,
             FIRST_LEVEL = 1,
             SECOND_LEVEL = 2,
@@ -30,7 +35,7 @@ namespace Enums
 
 
     enum class UserChoice : int
-     {
+    {
         MENU = 0,
         FIRST = 1,
         SECOND = 2,
@@ -40,7 +45,7 @@ namespace Enums
         SIXTH = 6,
         SEVENTH = 7,
         EIGHT = 8
-     };
+    };
 
 }
 

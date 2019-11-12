@@ -73,7 +73,7 @@ int Rune::getID() const
 
 //
 //
-    void Rune::highlight()
+void Rune::highlight()
 {
     if ( !ishHighlighted )
     {

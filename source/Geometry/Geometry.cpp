@@ -10,12 +10,13 @@
 //
 void Geometry::draw( sf::RenderWindow *window, const Enums::Stage stage, BackgroundManager* backgroundManager )
 {
-            for ( auto& rune : runes )
-            {
-                if(rune != nullptr)
-                    rune->draw(window);
-            }
-
+    for ( auto& rune : runes )
+    {
+        if ( rune != nullptr )
+        {
+            rune->draw(window);
+        }
+    }
 
     return;
 }
@@ -29,13 +30,17 @@ bool Geometry::isFree(int x_, int y_, int z)
     int x = field[x_][y_][z].x;
     int y = field[x_][y_][z].y;
 
-    for(int i = z + 1; i < MAX_DEPTH; ++i)
+    for ( int i = z + 1; i < MAX_DEPTH; ++i )
     {
         for ( int j = 0; j < 2; ++j )
-            for ( int k = 0; k < 2; ++k )
-        if ( field[x + j][y + k][i].info )
         {
-            return false;
+            for ( int k = 0; k < 2; ++k )
+            {
+                if ( field[x + j][y + k][i].info )
+                {
+                    return false;
+                }
+            }
         }
     }
 
@@ -53,20 +58,20 @@ bool Geometry::isFree(int x_, int y_, int z)
 
 //
 //
-void Geometry::fillRectangle(int x, int y, int z)
+void Geometry::fillRectangle(const int X, const int Y, const int Z)
 {
     for ( int i = 0; i < 2; ++i )
     {
         for ( int j = 0; j < 2; ++j )
         {
-            field[x + i][y + j][z].id = id;
-            field[x + i][y + j][z].x = x;
-            field[x + i][y + j][z].y = y;
-            field[x + i][y + j][z].info = true;
+            field[X + i][Y + j][Z].id = id;
+            field[X + i][Y + j][Z].x = X;
+            field[X + i][Y + j][Z].y = Y;
+            field[X + i][Y + j][Z].info = true;
         }
     }
 
-    positions.push_back(Position{x, y, z});
+    positions.push_back(Position{X, Y, Z});
 
     return;
 }
@@ -130,9 +135,9 @@ void Geometry::generateRunes()
     std::vector<int> vec;
 
     int first, second, temp;
-    first = id / RUNES_COUNT;
-    second = id / RUNES_COUNT;
-    temp = id - id / RUNES_COUNT * RUNES_COUNT;
+    first = id / RUNES_TYPES_COUNT;
+    second = id / RUNES_TYPES_COUNT;
+    temp = id - id / RUNES_TYPES_COUNT * RUNES_TYPES_COUNT;
 
     if ( first & 1 )
     {
@@ -142,7 +147,7 @@ void Geometry::generateRunes()
 
     std::vector<int> runeType;
 
-    for ( int i = 0; i < RUNES_COUNT; ++i )
+    for ( int i = 0; i < RUNES_TYPES_COUNT; ++i )
     {
 
         if ( i & 1 )
@@ -294,11 +299,11 @@ void Geometry::clear()
     id = 0;
     Tile tile;
 
-    for(int x = 0; x < MAX_WIDTH; ++x)
+    for ( int x = 0; x < MAX_WIDTH; ++x )
     {
-        for(int y = 0; y < MAX_HEIGHT; ++y)
+        for ( int y = 0; y < MAX_HEIGHT; ++y )
         {
-            for(int z = 0; z < MAX_DEPTH; ++z)
+            for ( int z = 0; z < MAX_DEPTH; ++z )
             {
                 field[x][y][z] = tile;
             }
@@ -307,9 +312,12 @@ void Geometry::clear()
 
     positions.clear();
 
-    for(size_t i = 0; i < runes.size(); ++i)
+    for ( auto& rune : runes )
     {
-        delete runes[i];
+        delete rune;
     }
+
     runes.clear();
+
+    return;
 }

@@ -25,9 +25,9 @@ void GameEngine::run()
     sf::Cursor cursor;
 
     sf::Texture image;
-    image.loadFromFile("resources/Oxygen.rgba");
+    image.loadFromFile("resources/Cursor.png");
 
-    cursor.loadFromPixels(image.copyToImage().getPixelsPtr(), sf::Vector2u(32, 32), sf::Vector2u(0, 0));
+    //cursor.loadFromPixels(image.copyToImage().getPixelsPtr(), sf::Vector2u(30, 30), sf::Vector2u(0, 0));
 
     window->setMouseCursor(cursor);
 
@@ -64,16 +64,21 @@ void GameEngine::run()
             backgroundManager->changeBackground(static_cast<Enums::Background::Background>(static_cast<int>(tempLevel)));
             user->clear();
             geometry.clear();
-            if(stage != Enums::Stage::MENU)
+            if ( stage != Enums::Stage::MENU )
+            {
                 geometry.loadLevel(static_cast<int>(tempLevel));
+            }
         }
 
         window->clear();
 
-        backgroundManager->draw(window);
+        backgroundManager->draw(window, stage);
 
         if(stage == Enums::Stage::GAME)
+        {
             geometry.draw(window, stage, backgroundManager);
+        }
+
         window->display();
 
     }

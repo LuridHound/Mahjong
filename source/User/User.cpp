@@ -6,7 +6,7 @@
 //
 User::User():
 choice{Enums::UserChoice::MENU},
-input(new MenuInput())
+input( std::make_unique<MenuInput>( MenuInput()) )
 {
 
 }
@@ -25,8 +25,7 @@ void User::respondEvent()
 //
 void User::setInput(Input* input_)
 {
-    delete input;
-    input = input_;
+    input.reset(input_);
 
     return;
 }

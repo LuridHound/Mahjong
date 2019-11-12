@@ -30,15 +30,15 @@ class GameEngine final
 
         Enums::Stage stage;
 
-        BackgroundManager* backgroundManager;
-        Geometry geometry;
-        User* user;
-
-        EventManager* eventManager;
-
         Enums::UserChoice tempLevel;
 
         sf::RenderWindow* window;
+
+        EventManager* eventManager;
+
+        BackgroundManager* backgroundManager;
+        Geometry geometry;
+        User* user;
 };
 
 

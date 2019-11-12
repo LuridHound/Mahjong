@@ -14,7 +14,7 @@ class Input;
 //
 class User final : public GameObject
 {
-public :
+    public :
         User();
 
         virtual void respondEvent() final;
@@ -30,8 +30,9 @@ public :
         Enums::UserChoice levelChoice();
 
         void clear();
+
     private :
-        Input* input;
+        std::unique_ptr<Input> input;
 
         Enums::UserChoice choice;
 

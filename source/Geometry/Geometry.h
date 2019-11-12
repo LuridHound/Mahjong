@@ -21,7 +21,6 @@ class Geometry final
         [[nodiscard]]
         bool isFree(int x, int y, int z);
 
-
         [[nodiscard]]
         bool isFree(Rune* rune);
 
@@ -39,9 +38,8 @@ class Geometry final
 
         void clearCell(int x, int y, int z);
 
-        void fillRectangle(int x, int y, int z);
+        void fillRectangle(const int X, const int Y, const int Z);
         void generateRunes();
-
 
     struct Position
                 {
@@ -56,10 +54,13 @@ class Geometry final
                     bool info = false;
                     int id = -1;
                 };
+
         constexpr static size_t MAX_WIDTH = 70u,
-                MAX_HEIGHT = 24u,
-                MAX_DEPTH = 7u;
-        constexpr static int RUNES_COUNT = 36;
+                                MAX_HEIGHT = 24u,
+                                MAX_DEPTH = 7u;
+
+        constexpr static int RUNES_TYPES_COUNT = 36;
+
         Tile field[MAX_WIDTH][MAX_HEIGHT][MAX_DEPTH]={};
         std::vector<Rune*> runes;
 };
