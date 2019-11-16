@@ -27,5 +27,13 @@ void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry, sf::
         user->setRune(rune);
     }
 
+#ifdef __linux__
+    if ( event->type == sf::Event::KeyPressed )
+    {
+        if(event->key.code == sf::Keyboard::S)
+        system("gnome-screenshot");
+    }
+#endif
+
     return;
 }
