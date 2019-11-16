@@ -8,17 +8,10 @@
 //
 void MenuInput::update(Enums::Stage &stage, User* user, Geometry* geometry, sf::Event* event)
 {
-/*
-    if(event->type == sf::Event::MouseButtonPressed)
-    {
-        if ( event->mouseButton.button == sf::Mouse::Button::Left);
-    }
-    */
-
-    if(event->type == sf::Event::KeyPressed)
+    if ( event->type == sf::Event::KeyPressed )
     {
 
-        if(event->key.code >= sf::Keyboard::Num1 && event->key.code <= sf::Keyboard::Num8)
+        if ( event->key.code >= sf::Keyboard::Num1 && event->key.code <= sf::Keyboard::Num8 )
         {
             user->setLevel(static_cast<Enums::UserChoice>(event->key.code - sf::Keyboard::Num0));
             stage = Enums::Stage::GAME;

@@ -34,10 +34,11 @@ class GameEngine final
 
         sf::RenderWindow* window;
 
-        EventManager* eventManager;
-
-        BackgroundManager* backgroundManager;
         Geometry geometry;
+
+        EventManager* eventManager;
+        BackgroundManager* backgroundManager;
+
         User* user;
 };
 

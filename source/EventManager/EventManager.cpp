@@ -20,7 +20,7 @@ void EventManager::subscribe(GameObject* gameObject)
 void EventManager::unsubscribe(GameObject* gameObject)
 {
     std::vector<GameObject*>::iterator it = std::find(subscribers.begin(), subscribers.end(), gameObject);
-    if ( it != subscribers.end())
+    if ( it != subscribers.end() )
     {
         subscribers.erase(it);
     }

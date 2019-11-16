@@ -25,7 +25,7 @@ class BackgroundManager final
 
     private:
 
-        constexpr static size_t BACKGROUND_COUNT = 9u;
+        void loadTextures();
 
         constexpr static int PICTURES_LEFT = 4,
                              PICTURES_RIGHT = 4;
@@ -38,9 +38,8 @@ class BackgroundManager final
 
         sf::Sprite image;
 
-        std::array<sf::Texture*, Enums::Background::BACKGROUND_COUNT>  textures;
+        std::array<sf::Texture, Enums::Background::BACKGROUND_COUNT>  textures;
 };
-
 
 
 #endif //MAHJONG_BACKGROUNDMANAGER_H

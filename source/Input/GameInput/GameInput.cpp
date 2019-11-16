@@ -30,8 +30,10 @@ void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry, sf::
 #ifdef __linux__
     if ( event->type == sf::Event::KeyPressed )
     {
-        if(event->key.code == sf::Keyboard::S)
-        system("gnome-screenshot");
+        if ( event->key.code == sf::Keyboard::S )
+        {
+            system("gnome-screenshot");
+        }
     }
 #endif
 

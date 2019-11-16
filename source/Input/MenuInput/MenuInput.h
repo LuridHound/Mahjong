@@ -10,6 +10,7 @@
 class MenuInput final : public Input
 {
     public :
+
         virtual void update(Enums::Stage& stage, User* user, Geometry* geometry, sf::Event* event) final;
 };
 

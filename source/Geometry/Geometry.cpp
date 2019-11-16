@@ -1,9 +1,9 @@
 #include "Geometry.h"
-#include "../BackgroundManager/BackgroundManager.h"
 
 #include <fstream>
-#include <iostream>
 #include <random>
+
+#include "../BackgroundManager/BackgroundManager.h"
 
 
 //
@@ -74,15 +74,6 @@ void Geometry::fillRectangle(const int X, const int Y, const int Z)
     positions.push_back(Position{X, Y, Z});
 
     return;
-}
-
-
-//
-//
-[[nodiscard]]
-bool isFree(Rune* rune)
-{
-
 }
 
 
@@ -282,15 +273,6 @@ void Geometry::deleteRunes(Rune* first, Rune* second)
     ), runes.end());
 
     return;
-}
-
-
-//
-//
-[[nodiscard]]
-bool Geometry::isEmpty() const
-{
-    return runes.empty();
 }
 
 

@@ -16,7 +16,7 @@ class Rune final
 {
     public :
 
-        Rune(const int ID);
+        explicit Rune(const int ID);
 
         void setPosition(const int x, const int y, const int z);
 
@@ -30,15 +30,15 @@ class Rune final
         void draw(sf::RenderWindow* window);
 
         [[nodiscard]]
-        sf::Vector3i getPosition()
-        {
-            return sf::Vector3i(x, y, z);
-        };
+        sf::Vector3i getPosition();
 
         void highlight();
         void unhighlight();
 
+
+        [[nodiscard]]
         static sf::Vector2i getOffset();
+        [[nodiscard]]
         static sf::Vector2i getTextureSize();
 
     private :

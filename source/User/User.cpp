@@ -37,12 +37,12 @@ void User::update(Enums::Stage& stage, Geometry* geometry)
 {
     respondEvent();
 
-    for(auto event : events)
+    for ( auto event : events )
     {
         input->update(stage, this, geometry, event);
     }
 
-    if(first != nullptr)
+    if ( first != nullptr )
     {
         first->highlight();
     }

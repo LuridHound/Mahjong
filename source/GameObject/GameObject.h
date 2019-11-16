@@ -12,11 +12,13 @@
 class GameObject
 {
     public :
+
         virtual void respondEvent() = 0;
 
         void getEvent(sf::Event* event);
 
     protected :
+
         std::vector<sf::Event*> events;
 };
 

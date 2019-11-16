@@ -22,15 +22,9 @@ class Geometry final
         bool isFree(int x, int y, int z);
 
         [[nodiscard]]
-        bool isFree(Rune* rune);
-
-        [[nodiscard]]
         Rune* getRune(int x, int y);
 
         void loadLevel(const int LEVEL);
-
-        [[nodiscard]]
-        bool isEmpty() const;
 
         void clear();
 

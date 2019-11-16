@@ -105,6 +105,7 @@ void Rune::unhighlight()
 
 //
 //
+[[nodiscard]]
 sf::Vector2i Rune::getOffset()
 {
     return sf::Vector2i(offsetX, offsetY);
@@ -113,7 +114,17 @@ sf::Vector2i Rune::getOffset()
 
 //
 //
+[[nodiscard]]
 sf::Vector2i Rune::getTextureSize()
 {
     return sf::Vector2i(textureSizeX, textureSizeY);
+}
+
+
+//
+//
+[[nodiscard]]
+sf::Vector3i Rune::getPosition()
+{
+    return sf::Vector3i(x, y, z);
 }

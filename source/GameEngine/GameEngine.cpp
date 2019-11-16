@@ -1,4 +1,3 @@
-#include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Event.hpp>
 #include <iostream>
 #include "GameEngine.h"
@@ -6,23 +5,8 @@
 
 //
 //
-[[nodiscard]]
-bool isOneType(Rune* first, Rune* second)
-{
-    if ( first->getType() == second->getType() )
-    {
-        return true;
-    }
-
-    return false;
-}
-
-
-//
-//
 void GameEngine::run()
 {
-
     Rune* first = nullptr, *second = nullptr;
 
     window->setFramerateLimit(60);
@@ -87,13 +71,15 @@ stage(Enums::Stage::MENU)
     user = new User();
     initializeWindow();
 
-    tempLevel = user->levelChoice();
     backgroundManager = new BackgroundManager();
+    backgroundManager->changeBackground(Enums::Background::Background::MENU);
 
     eventManager = new EventManager();
     eventManager->subscribe(user);
 
-    backgroundManager->changeBackground(Enums::Background::Background::MENU);
+
+    tempLevel = user->levelChoice();
+
     geometry.loadLevel(2);
 }
 
