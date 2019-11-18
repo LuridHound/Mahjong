@@ -1,3 +1,5 @@
+#include <memory>
+#include <iostream>
 #include "User.h"
 #include "../Input/MenuInput/MenuInput.h"
 
@@ -20,26 +22,15 @@ void User::respondEvent()
 }
 
 
-
 //
 //
-void User::setInput(Input* input_)
-{
-    input.reset(input_);
-
-    return;
-}
-
-
-//
-//
-void User::update(Enums::Stage& stage, Geometry* geometry)
+void User::update(Enums::Stage& stage, Geometry& geometry)
 {
     respondEvent();
 
     for ( auto event : events )
     {
-        input->update(stage, this, geometry, event);
+        input->update(stage, *this, geometry, event);
     }
 
     if ( first != nullptr )
@@ -50,7 +41,7 @@ void User::update(Enums::Stage& stage, Geometry* geometry)
     if ( first == second && first != nullptr )
     {
         first->unhighlight();
-        first = second = nullptr;
+        clear();
     }
 
     if ( first != nullptr && second != nullptr )
@@ -59,9 +50,9 @@ void User::update(Enums::Stage& stage, Geometry* geometry)
         second->unhighlight();
         if ( first->getType() == second->getType() )
         {
-            geometry->deleteRunes(first, second);
+            geometry.deleteRunes(first, second);
         }
-        first = second = nullptr;
+        clear();
     }
 
     events.clear();
@@ -72,7 +63,17 @@ void User::update(Enums::Stage& stage, Geometry* geometry)
 
 //
 //
-void User::setRune(Rune *rune)
+void User::setInput(std::unique_ptr<Input> input_)
+{
+    input = std::move(input_);
+
+    return;
+}
+
+
+//
+//
+void User::setRune(std::shared_ptr<Rune>& rune)
 {
     if ( first == nullptr )
     {
@@ -92,14 +93,6 @@ void User::setRune(Rune *rune)
 
 //
 //
-Enums::UserChoice User::levelChoice()
-{
-    return choice;
-}
-
-
-//
-//
 void User::setLevel(const Enums::UserChoice level)
 {
     choice = level;
@@ -110,9 +103,19 @@ void User::setLevel(const Enums::UserChoice level)
 
 //
 //
+[[nodiscard]]
+Enums::UserChoice User::levelChoice()
+{
+    return choice;
+}
+
+
+//
+//
 void User::clear()
 {
-    first = second = nullptr;
+    first.reset();
+    second.reset();
 
     return;
 }

@@ -21,7 +21,7 @@ class BackgroundManager final
 
         void changeBackground(const Enums::Background::Background LEVEL);
 
-        void draw(sf::RenderWindow* window, const Enums::Stage);
+        void draw(sf::RenderWindow& window, const Enums::Stage);
 
     private:
 

@@ -16,30 +16,30 @@ class Rune final
 {
     public :
 
-        explicit Rune(const int ID);
-
-        void setPosition(const int x, const int y, const int z);
-
-        [[nodiscard]]
-        size_t getType() const;
-
-        [[nodiscard]]
-        int getID() const;
-
-        void setRuneType(const int TYPE);
-        void draw(sf::RenderWindow* window);
-
-        [[nodiscard]]
-        sf::Vector3i getPosition();
-
-        void highlight();
-        void unhighlight();
-
-
         [[nodiscard]]
         static sf::Vector2i getOffset();
         [[nodiscard]]
         static sf::Vector2i getTextureSize();
+
+        Rune() = delete;
+
+        explicit Rune(const int ID);
+
+        void setPosition(const int X, const int Y, const int Z);
+        [[nodiscard]]
+        sf::Vector3i getPosition();
+
+        void setRuneType(const int TYPE);
+        [[nodiscard]]
+        size_t getType() const;
+
+        void draw(sf::RenderWindow& window);
+
+        [[nodiscard]]
+        int getID() const;
+
+        void highlight();
+        void unhighlight();
 
     private :
 

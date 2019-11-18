@@ -14,8 +14,10 @@ namespace Enums
         GAME = 1
     };
 
-    //  TODO
-    //  Check typos.
+    const int UNDEFINED = -1;
+
+    //
+    //
     namespace Background
     {
         enum class Background : int
@@ -24,11 +26,11 @@ namespace Enums
             FIRST_LEVEL = 1,
             SECOND_LEVEL = 2,
             THIRD_LEVEL = 3,
-            FORTH_LEVEL = 4,
+            FOURTH_LEVEL = 4,
             FIFTH_LEVEL = 5,
             SIXTH_LEVEL = 6,
             SEVENTH_LEVEL = 7,
-            EIGHT_LEVEL = 8
+            EIGHTH_LEVEL = 8
         };
         constexpr static size_t BACKGROUND_COUNT = 9u;
     }
@@ -40,11 +42,11 @@ namespace Enums
         FIRST = 1,
         SECOND = 2,
         THIRD = 3,
-        FORTH = 4,
+        FOURTH = 4,
         FIFTH = 5,
         SIXTH = 6,
         SEVENTH = 7,
-        EIGHT = 8
+        EIGHTH = 8
     };
 
 }

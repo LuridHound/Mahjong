@@ -5,15 +5,15 @@
 
 //
 //
-void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry, sf::Event* event)
+void GameInput::update(Enums::Stage& stage, User& user, Geometry& geometry, sf::Event* event)
 {
     if ( event->type == sf::Event::KeyPressed )
     {
         if ( event->key.code == sf::Keyboard::Escape )
         {
-            user->setLevel(Enums::UserChoice::MENU);
+            user.setLevel(Enums::UserChoice::MENU);
             stage = Enums::Stage::MENU;
-            user->setInput(new MenuInput());
+            user.setInput(std::make_unique<MenuInput>());
         }
     }
 
@@ -22,9 +22,9 @@ void GameInput::update(Enums::Stage& stage, User* user, Geometry* geometry, sf::
         int x = sf::Mouse::getPosition().x;
         int y = sf::Mouse::getPosition().y;
 
-        auto rune = geometry->getRune(x, y);
+        auto rune = geometry.getRune(x, y);
 
-        user->setRune(rune);
+        user.setRune(rune);
     }
 
 #ifdef __linux__

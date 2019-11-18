@@ -32,14 +32,14 @@ class GameEngine final
 
         Enums::UserChoice tempLevel;
 
-        sf::RenderWindow* window;
+        sf::RenderWindow window;
 
         Geometry geometry;
 
-        EventManager* eventManager;
-        BackgroundManager* backgroundManager;
+        EventManager eventManager;
+        BackgroundManager backgroundManager;
 
-        User* user;
+        User user;
 };
 
 

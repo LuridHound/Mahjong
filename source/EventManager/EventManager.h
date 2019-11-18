@@ -20,6 +20,7 @@ class EventManager final
         void pushEvent(sf::Event* event);
 
     private :
+
         std::vector<GameObject*> subscribers;
 };
 

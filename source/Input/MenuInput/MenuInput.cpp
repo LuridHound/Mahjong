@@ -6,17 +6,16 @@
 
 //
 //
-void MenuInput::update(Enums::Stage &stage, User* user, Geometry* geometry, sf::Event* event)
+void MenuInput::update(Enums::Stage &stage, User& user, Geometry& geometry, sf::Event* event)
 {
     if ( event->type == sf::Event::KeyPressed )
     {
 
         if ( event->key.code >= sf::Keyboard::Num1 && event->key.code <= sf::Keyboard::Num8 )
         {
-            user->setLevel(static_cast<Enums::UserChoice>(event->key.code - sf::Keyboard::Num0));
+            user.setLevel(static_cast<Enums::UserChoice>(event->key.code - sf::Keyboard::Num0));
             stage = Enums::Stage::GAME;
-            user->setInput(new GameInput());
-            return;
+            user.setInput(std::make_unique<GameInput>());
         }
 
     }

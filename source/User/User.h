@@ -10,34 +10,38 @@
 
 class Input;
 
+
 //
 //
 class User final : public GameObject
 {
     public :
+
         User();
 
         virtual void respondEvent() final;
 
-        void update(Enums::Stage& stage, Geometry* geometry);
+        void update(Enums::Stage& stage, Geometry& geometry);
 
-        void setInput(Input* input_);
+        void setInput(std::unique_ptr<Input> input_);
 
-        void setRune(Rune* rune);
+        void setRune(std::shared_ptr<Rune>& rune);
 
         void setLevel(const Enums::UserChoice level);
 
+        [[nodiscard]]
         Enums::UserChoice levelChoice();
 
         void clear();
 
     private :
-        std::unique_ptr<Input> input;
 
         Enums::UserChoice choice;
 
-        Rune* first;
-        Rune* second;
+        std::unique_ptr<Input> input;
+
+        std::shared_ptr<Rune> first;
+        std::shared_ptr<Rune> second;
 };
 
 
