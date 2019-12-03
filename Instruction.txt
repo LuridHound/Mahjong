@@ -1,0 +1,12 @@
+Each picture corrspond a level by the following rule:
+1	5
+2	6
+3	7
+4	8
+, where each number is the number of the level.
+
+Rules:
+1)Choose a rune by cliking on it and try to find a pair.
+2)If you click on the selected rune 2nd time - it will be deselected.
+3)If you click on the another rune, when you have a selected rune,
+it will disappear, if the are identical, or deselect the first one.
