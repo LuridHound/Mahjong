@@ -2,7 +2,7 @@
 #define MAHJONG_GAMEINPUT_H
 
 
-#include "../Input.h"
+#include <Input/Input.h>
 
 
 //

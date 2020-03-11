@@ -1,7 +1,9 @@
 #include <SFML/Window/Keyboard.hpp>
+
 #include <iostream>
+
 #include "MenuInput.h"
-#include "../GameInput/GameInput.h"
+#include <Input/GameInput/GameInput.h>
 
 
 //

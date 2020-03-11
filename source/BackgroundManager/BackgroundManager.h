@@ -8,7 +8,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "../Enums.h"
+#include <Enums.h>
 
 
 //

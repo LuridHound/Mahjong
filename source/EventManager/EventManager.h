@@ -4,7 +4,7 @@
 
 #include "SFML/Window.hpp"
 
-#include "../GameObject/GameObject.h"
+#include <GameObject/GameObject.h>
 
 
 //

@@ -2,9 +2,9 @@
 #define MAHJONG_INPUT_H
 
 
-#include "../Enums.h"
-#include "../User/User.h"
-#include "../Geometry/Geometry.h"
+#include <Enums.h>
+#include <User/User.h>
+#include <Geometry/Geometry.h>
 
 
 class User;

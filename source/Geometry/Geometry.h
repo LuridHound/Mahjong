@@ -6,9 +6,9 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "../Rune/Rune.h"
-#include "../Enums.h"
-#include "../BackgroundManager/BackgroundManager.h"
+#include <Rune/Rune.h>
+#include <Enums.h>
+#include <BackgroundManager/BackgroundManager.h>
 
 
 //

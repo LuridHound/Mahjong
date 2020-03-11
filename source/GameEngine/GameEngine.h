@@ -2,14 +2,14 @@
 #define MAHJONG_GAMEENGINE_H
 
 
-#include "../Enums.h"
+#include <Enums.h>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "../BackgroundManager/BackgroundManager.h"
-#include "../Geometry/Geometry.h"
-#include "../User/User.h"
-#include "../EventManager/EventManager.h"
+#include <BackgroundManager/BackgroundManager.h>
+#include <Geometry/Geometry.h>
+#include <User/User.h>
+#include <EventManager/EventManager.h>
 
 
 //
